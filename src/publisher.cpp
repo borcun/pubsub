@@ -1,11 +1,9 @@
 #include "publisher.h"
 
-Publisher::Publisher(void) : m_name("publisher") {
-
+Publisher::Publisher(void) : m_name(DEFAULT_PUBLISHER_NAME) {
 }
 
 Publisher::Publisher(const std::string &name) : m_name(name) {
-
 }
 
 Publisher::~Publisher() {
@@ -21,26 +19,21 @@ std::string Publisher::getName(void) const {
   return m_name;
 }
 
-bool Publisher::subscribe(Subscriber *subscriber) {
-  if (nullptr == subscriber) {
+bool Publisher::subscribe(Subscriber *subscriber) {  
+  if (contains(subscriber)) {
     return false;
   }
   
-  std::list<Subscriber *>::iterator it;
-  bool isAdded = false;
-    
-  for (it = m_subscribers.begin(); it != m_subscribers.end() && !isAdded; ++it) {
-    if (subscriber->getName() == (*it)->getName()) {
-      isAdded = true;
-    }
-  }
+  m_subscribers.push_back(subscriber);
+  return true;
+}
 
-  if (!isAdded) {
-    m_subscribers.push_back(subscriber);
-    return true;
+void Publisher::unsubscribe(Subscriber *subscriber) {
+  if (contains(subscriber)) {
+    m_subscribers.remove(subscriber);	
   }
-
-  return false;
+  
+  return;
 }
 
 void Publisher::notify(Message &message) {
@@ -51,4 +44,21 @@ void Publisher::notify(Message &message) {
   }
 
   return;
+}
+
+bool Publisher::contains(const Subscriber *subscriber) {
+  if (nullptr == subscriber) {
+    return false;
+  }
+
+  std::list<Subscriber *>::iterator it;
+  bool isContained = false;
+    
+  for (it = m_subscribers.begin(); it != m_subscribers.end() && !isContained; ++it) {
+    if (subscriber->getName() == (*it)->getName()) {
+      isContained = true;
+    }
+  }
+
+  return isContained;
 }

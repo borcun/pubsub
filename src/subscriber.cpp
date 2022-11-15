@@ -1,6 +1,6 @@
 #include "subscriber.h"
 
-Subscriber::Subscriber(void) : m_name("subscriber") {
+Subscriber::Subscriber(void) : m_name(DEFAULT_SUBSCRIBER_NAME) {
 
 }
 

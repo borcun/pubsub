@@ -19,14 +19,14 @@ MessageFactory *MessageFactory::getInstance(void) {
 Message MessageFactory::createMessage(const std::string &topic) {
   Message message {topic};
 
-  if (!contain(message)) {
+  if (!contains(message)) {
     m_messageList.push_back(message);
   }
 
   return message;
 }
 
-bool MessageFactory::contain(const Message &message) {
+bool MessageFactory::contains(const Message &message) {
   std::list<Message>::iterator it;
   bool isContained = false;
   

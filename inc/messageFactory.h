@@ -14,7 +14,7 @@ class MessageFactory {
   static MessageFactory *getInstance(void);
   virtual ~MessageFactory();
   Message createMessage(const std::string &topic);
-  bool contain(const Message &message);
+  bool contains(const Message &message);
 
  private:
   static MessageFactory *m_instance;
