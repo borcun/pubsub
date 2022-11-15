@@ -68,7 +68,7 @@ class Publisher {
    * @param [in] message - Message object to be sent to the subscribers
    * @return -
    */  
-  virtual void notify(Message &message) final;
+  virtual void notify(const Message &message) final;
   
  private:
   //! name of publisher

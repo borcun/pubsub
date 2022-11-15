@@ -45,7 +45,7 @@ class Subscriber {
   std::string getName(void) const;
 
   //! function that is triggered when message's publisher notify
-  virtual void onReceived(Message &message) = 0;
+  virtual void onReceived(const Message &message) = 0;
 
  private:
   //! name of subscriber

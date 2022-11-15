@@ -12,7 +12,7 @@ RSSReader::~RSSReader() {
 
 }
 
-void RSSReader::onReceived(Message &message) {
+void RSSReader::onReceived(const Message &message) {
   std::cout << "Received message by " << getName() << std::endl;
   std::cout << message << std::endl;
 }

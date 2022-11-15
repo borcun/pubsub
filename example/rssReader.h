@@ -9,7 +9,7 @@ class RSSReader : public Subscriber {
   RSSReader(void);
   RSSReader(const std::string &name);
   ~RSSReader();
-  virtual void onReceived(Message &message);
+  virtual void onReceived(const Message &message);
 };
 
 #endif

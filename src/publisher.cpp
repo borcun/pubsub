@@ -36,7 +36,7 @@ void Publisher::unsubscribe(Subscriber *subscriber) {
   return;
 }
 
-void Publisher::notify(Message &message) {
+void Publisher::notify(const Message &message) {
   std::list<Subscriber *>::iterator it;
     
   for (it = m_subscribers.begin(); it != m_subscribers.end(); ++it) {

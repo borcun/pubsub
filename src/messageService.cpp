@@ -1,6 +1,6 @@
 #include "messageService.h"
 
-MessageService::MessageService(const std::string &name) : m_name(name) {
+MessageService::MessageService(void) {
   m_message = nullptr;
   m_publisher = nullptr;
 }
@@ -19,18 +19,24 @@ void MessageService::setPublisher(Publisher *publisher) {
   return;
 }
 
-bool MessageService::subscribe(Subscriber *subscriber) {
-  bool isAdded = false;
-  
-  if (nullptr != m_publisher) {
-    isAdded = m_publisher->subscribe(subscriber);
+bool MessageService::addSubscriber(Subscriber *subscriber) {
+  if (nullptr == m_publisher) {
+    return false;
   }
+  
+  return m_publisher->subscribe(subscriber);
+}
 
-  return isAdded;
+void MessageService::removeSubscriber(Subscriber *subscriber) {
+  if (nullptr != m_publisher) {
+    m_publisher->unsubscribe(subscriber);
+  }
+  
+  return;
 }
 
 bool MessageService::execute(void) {
-  if (nullptr == m_publisher || nullptr == m_message) {
+  if (nullptr == m_message || nullptr == m_publisher) {
     return false;
   }
 
