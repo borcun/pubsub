@@ -5,7 +5,7 @@ CFLAGS=-c -Wall -std=c++20
 LFLAGS=-o
 SRC=$(SDIR)/message.cpp $(SDIR)/messageFactory.cpp message-test.cpp
 OBJ=message.o messageFactory.o message-test.o
-EXEC=message-test
+EXEC=message-factory-test
 INC=-I /usr/include/ -I $(IDIR)
 LIB=-lgtest -L /usr/lib64/
 RM=rm -rf

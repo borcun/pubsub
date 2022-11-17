@@ -1,0 +1,17 @@
+##About Library
+
+It is a small publisher-subscriber library, which is developed on Fedora OS for Intel x64 architecture.
+
+Message is the basic data model, which exists from topic, time label and payload parts.
+Topic is a string and must be unique within your projects. Time label is well-known struct timeval instance,
+it's stored as present one, not formatted. Payload part is designed as string since it's just a symbolic
+payload. For professional usage, it might be redesigned as generic.
+
+MessageFactory class is a factory generating custom messages, and stores them to prevent regeneration.
+Its design is easy-to-use if you know factory design pattern, there is a basic function starts with create
+prefix. You may also check examples into example directory.
+
+Publisher and Subscriber classes construct the infrastructure of the library. Message instances created by
+MessageFactory are shared from one publisher to many subscribers connected together within a context. Thus,
+messaging architecture is one-to-many, but it's open to be extended either.
+
