@@ -1,0 +1,4 @@
+- Execute 'make'
+- Execute 'make install' with root permission
+- Update LD_LIBRARY_PATH to include the shared object of the library
+    Ex: export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
