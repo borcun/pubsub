@@ -1,0 +1,4 @@
+# directories
+INC=inc
+INSTALL_DIR=/usr/local
+EXAMPLEDIR=example

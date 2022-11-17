@@ -7,8 +7,6 @@ OBJ=rssFeeder.o rssReader.o main.o
 EXEC=rss-example
 INC=-I /usr/local/include/pubsub
 LIB=-lpubsub -L /usr/local/lib/
-RM=rm -rf
-BACKUPS=*~
 
 all:
 	$(CXX) $(CFLAGS) $(SRC) $(INC)
@@ -19,4 +17,4 @@ debug:
 	$(CXX) $(OBJ) $(LFLAGS) $(EXEC) $(LIB)
 
 clean:
-	$(RM) $(OBJ) $(EXEC) $(BACKUPS)
+	rm -rf $(OBJ) $(EXEC) *~
