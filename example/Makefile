@@ -1,12 +1,11 @@
-CXX=g++
-CFLAGS=-c -Wall -std=c++20
-LFLAGS=-o
-DFLAGS=-g
+include ../Makefile.dirs
+include ../Makefile.cmd
+
 SRC=rssFeeder.cpp rssReader.cpp main.cpp
 OBJ=rssFeeder.o rssReader.o main.o
 EXEC=rss-example
-INC=-I /usr/local/include/pubsub
-LIB=-lpubsub -L /usr/local/lib/
+INC=-I $(INC_DIR)
+LIB=-lpubsub -L $(LIB_DIR)
 
 all:
 	$(CXX) $(CFLAGS) $(SRC) $(INC)

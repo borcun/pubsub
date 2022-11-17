@@ -1,29 +1,27 @@
 include Makefile.dirs
 include Makefile.libs
+include Makefile.cmd
 
-CXX=g++
-CFLAGS=-c -Wall -fPIC -std=c++20
-LFLAGS=-o
 IFLAGS=-I $(INC)
 SRC=src/message.cpp src/messageFactory.cpp src/subscriber.cpp src/publisher.cpp src/messageService.cpp
 OBJ=message.o messageFactory.o subscriber.o publisher.o messageService.o
 
 .PHONY: all
 all:
-	$(CXX) $(CFLAGS) $(SRC) $(IFLAGS)
+	$(CXX) $(CFLAGS) -fPIC $(SRC) $(IFLAGS)
 	$(CXX) $(SHARED) $(LFLAGS) $(LIB) $(OBJ)
-	cd $(EXAMPLEDIR) && make
+	cd $(EXAMPLE_DIR) && make
 
 .PHONY: clean
 clean:
 	rm -rf $(OBJ) $(LIB) *~
-	cd $(EXAMPLEDIR) && make clean
+	cd $(EXAMPLE_DIR) && make clean
 
 .PHONY: install
 install: all
 	mkdir $(INSTALL_DIR)
-	mkdir $(INSTALL_DIR)/include/pubsub/
-	cp $(INC)/* $(INSTALL_DIR)/include/pubsub/
-	mkdir $(INSTALL_DIR)/lib/
-	cp $(LIB) $(INSTALL_DIR)/lib/
+	mkdir $(INC_DIR)
+	cp $(INC)/* $(INC_DIR)
+	mkdir $(LIB_DIR)
+	cp $(LIB) $(LIB_DIR)
 	sync
