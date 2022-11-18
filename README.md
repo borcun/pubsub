@@ -17,7 +17,7 @@ the payload is data part of Message instance. It's designed as a string like top
 MessageFactory is a class that is designed as factory design pattern. It generates custom messages
 according to topic given by developer and stores the messages into a message list. Storing the messages
 into a message list, it can check any willness of regeneration of any message again. Therefore, it can
-uniqueness of each message.
+provides uniqueness of each message.
 
 Publisher and Subscriber classes are communication components of the library. Knowing from observer
 design pattern, these components provides event-based communication instead of polling mechanism.
