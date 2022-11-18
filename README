@@ -14,10 +14,10 @@ The time label is struct timeval instance of the any UNIX system. It is used to 
 the payload of Message instance is set. Therefore, it is set once the payload is set. The last field,
 the payload is data part of Message instance. It's designed as a string like topic.
 
-MessageFactory is a class that is designed as factory design pattern. It generates custom messages
-according to topic given by developer and stores the messages into a message list. Storing the messages
-into a message list, it can check any willness of regeneration of any message. Therefore, it can achieve
-uniqueness of each message.
+MessageFactory is a class that is designed as both factory and singleton design patterns. It generates
+custom messages according to topic given by developer and stores the messages into a message list.
+Storing the messages into a message list, it can check any willness of regeneration of any message.
+Therefore, it can provides uniqueness of each message.
 
 Publisher and Subscriber classes are communication components of the library. Knowing from observer
 design pattern, these components provides event-based communication instead of polling mechanism.
