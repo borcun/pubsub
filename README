@@ -24,6 +24,12 @@ design pattern, these components provides event-based communication instead of p
 Sharing data between them is Message intances. Message instances created by MessageFactory are shared
 from one publisher to many subscribers, which are connected together within special context.
 
+Publisher and Subscriber classes are interfaces for the communication. Although Subscriber is an
+abstract class in terms of C++ terminology, Publisher is concrete class. Developer can use Publisher
+class as it's present, but inheriting it as well like does for Subscriber classes is recommended.
+Subscriber class includes a pure virtual function called onReceived. Its aim is being used as a
+callback by developer.
+
 MessageService class exists from one Message instance, one Publisher instance and many Subscriber
 instances. After setting fields of a MessageService instance, you can execute it to perform message
 delivering according to publish-subscribe principle.

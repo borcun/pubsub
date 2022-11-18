@@ -44,7 +44,11 @@ class Subscriber {
    */  
   std::string getName(void) const;
 
-  //! function that is triggered when message's publisher notify
+  /**
+   * @brief function that is triggered when message's publisher notify
+   * @param [in] message - Message instance send by Publisher inside the same context
+   * @return -
+   */
   virtual void onReceived(const Message &message) = 0;
 
  private:
