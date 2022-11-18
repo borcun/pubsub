@@ -9,14 +9,24 @@ MessageService::~MessageService() {
 
 }
 
-void MessageService::setMessage(Message *message) {
+bool MessageService::setMessage(Message *message) {
+  if (nullptr == message) {
+    return false;
+  }
+  
   m_message = message;
-  return;
+
+  return true;
 }
 
-void MessageService::setPublisher(Publisher *publisher) {
+bool MessageService::setPublisher(Publisher *publisher) {
+  if (nullptr == publisher) {
+    return false;
+  }
+  
   m_publisher = publisher;
-  return;
+
+  return true;
 }
 
 bool MessageService::addSubscriber(Subscriber *subscriber) {

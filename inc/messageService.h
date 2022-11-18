@@ -29,16 +29,16 @@ class MessageService {
   /**
    * @brief function that sets data (message) of message service
    * @param [in] message - Message pointer
-   * @return -
+   * @return true if the message is set successfully. Otherwise, return false.
    */
-  void setMessage(Message *message);
+  bool setMessage(Message *message);
 
   /**
    * @brief function that sets publisher of message service
    * @param [in] publisher - Publisher pointer
-   * @return -
+   * @return true if the publisher is set successfully. Otherwise, return false.
    */
-  void setPublisher(Publisher *publisher);
+  bool setPublisher(Publisher *publisher);
 
   /**
    * @brief function that adds a Subscriber to message service
