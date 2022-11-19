@@ -2,50 +2,44 @@
 
 std::ostream& operator<<(std::ostream &os, const Message &message) {
   os <<
-    "  [Topic] " << message.m_topic << std::endl <<
-    "   [Time] " << message.m_time.tv_sec << "." << message.m_time.tv_usec << std::endl <<
+    "   [Time] " << message.m_tv.tv_sec << "." << message.m_tv.tv_usec << std::endl <<
     "[Payload] " << message.m_payload << std::endl;
 
   return os;
 }
 
-Message::Message(const std::string &topic) : m_topic(topic) {
-  m_time.tv_sec = 0;
-  m_time.tv_usec = 0;
+Message::Message(void) {
+  m_tv.tv_sec = 0;
+  m_tv.tv_usec = 0;
   m_payload.clear();
 }
 
 Message::Message(const Message &message) {
-  m_topic = message.m_topic;
-  m_time = message.m_time;
+  m_tv = message.m_tv;
   m_payload = message.m_payload;
 }
 
 Message::Message(const Message &&message) {
-  m_topic = std::move(message.m_topic);
-  m_time = std::move(message.m_time);
+  m_tv = std::move(message.m_tv);
   m_payload = std::move(message.m_payload);
 }
 
 Message::~Message() {
-  m_topic.clear();
   m_payload.clear();
 }
 
-void Message::setPayload(const std::string &payload) {
-  m_payload = payload;
-  // once payload is set, its time label is also set
-  gettimeofday(&m_time, NULL);
-  
+void Message::setTime(const struct timeval &tv) {
+  m_tv = tv;
   return;
 }
 
-std::string Message::getTopic(void) const {
-  return m_topic;
+void Message::setPayload(const std::string &payload) {
+  m_payload = payload;  
+  return;
 }
 
 struct timeval Message::getTime(void) const {
-  return m_time;
+  return m_tv;
 }
 
 std::string Message::getPayload(void) const {
@@ -53,23 +47,23 @@ std::string Message::getPayload(void) const {
 }
 
 Message &Message::operator=(const Message &message) {
-  m_topic = message.m_topic;
-  m_time = message.m_time;
+  m_tv = message.m_tv;
   m_payload = message.m_payload;
 
   return *this;
 }
 
 Message &Message::operator=(const Message &&message) {
-  m_topic = std::move(message.m_topic);
-  m_time = std::move(message.m_time);
+  m_tv = std::move(message.m_tv);
   m_payload = std::move(message.m_payload);
 
   return *this;
 }
 
 bool Message::operator==(const Message &message) {
-  return m_topic == message.m_topic && m_payload == message.m_payload;
+  return m_tv.tv_sec == message.m_tv.tv_sec &&
+    m_tv.tv_usec == message.m_tv.tv_usec &&
+    m_payload == message.m_payload;
 }
 
 bool Message::operator!=(const Message &message) {

@@ -2,8 +2,8 @@ include Makefile.dirs
 include Makefile.cmd
 
 IFLAGS=-I $(INC)
-SRC=src/message.cpp src/messageFactory.cpp src/subscriber.cpp src/publisher.cpp src/messageService.cpp
-OBJ=message.o messageFactory.o subscriber.o publisher.o messageService.o
+SRC=src/message.cpp src/topicFactory.cpp src/subscriber.cpp src/publisher.cpp src/topic.cpp
+OBJ=message.o topicFactory.o subscriber.o publisher.o topic.o
 SHARED=-shared
 LIB=lib/libpubsub.so
 

@@ -4,8 +4,8 @@ include ../Makefile.cmd
 SRC=rssFeeder.cpp rssReader.cpp main.cpp
 OBJ=rssFeeder.o rssReader.o main.o
 EXEC=rss-example
-INC=-I $(INC_DIR)
-LIB=-lpubsub -L $(LIB_DIR)
+INC=-I ../inc/
+LIB=-lpubsub -L ../lib/
 
 all:
 	$(CXX) $(CFLAGS) $(SRC) $(INC)

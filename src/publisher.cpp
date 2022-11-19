@@ -1,64 +1,38 @@
 #include "publisher.h"
 
-Publisher::Publisher(void) : m_name(DEFAULT_PUBLISHER_NAME) {
-}
-
 Publisher::Publisher(const std::string &name) : m_name(name) {
+  m_topic = nullptr;
 }
 
 Publisher::~Publisher() {
-  m_subscribers.clear();
-}
-
-void Publisher::setName(const std::string &name) {
-  m_name = name;
-  return;
+  m_topic = nullptr;
 }
 
 std::string Publisher::getName(void) const {
   return m_name;
 }
 
-bool Publisher::subscribe(Subscriber *subscriber) {  
-  if (contains(subscriber)) {
-    return false;
-  }
-  
-  m_subscribers.push_back(subscriber);
-  return true;
-}
-
-void Publisher::unsubscribe(Subscriber *subscriber) {
-  if (contains(subscriber)) {
-    m_subscribers.remove(subscriber);	
-  }
-  
+void Publisher::setTopic(Topic *topic) {
+  m_topic = topic;
   return;
 }
 
-void Publisher::notify(const Message &message) {
-  std::list<Subscriber *>::iterator it;
-    
-  for (it = m_subscribers.begin(); it != m_subscribers.end(); ++it) {
-    (*it)->onReceived(message);
-  }
-
-  return;
+bool Publisher::operator==(const Publisher &publisher) {
+  return publisher.m_name == m_name;
 }
 
-bool Publisher::contains(const Subscriber *subscriber) {
-  if (nullptr == subscriber) {
-    return false;
-  }
+bool Publisher::operator!=(const Publisher &publisher) {
+  return publisher.m_name != m_name;
+}
 
-  std::list<Subscriber *>::iterator it;
-  bool isContained = false;
+void Publisher::notify(Message message) {
+  if (nullptr != m_topic) {
+    struct timeval tv;
     
-  for (it = m_subscribers.begin(); it != m_subscribers.end() && !isContained; ++it) {
-    if (subscriber->getName() == (*it)->getName()) {
-      isContained = true;
-    }
+    gettimeofday(&tv, NULL);
+    message.setTime(tv);
+    m_topic->publish(message);
   }
-
-  return isContained;
+  
+  return;
 }

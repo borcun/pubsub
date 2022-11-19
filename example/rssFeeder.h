@@ -5,7 +5,6 @@
 
 class RSSFeeder : public Publisher {
  public:
-  RSSFeeder(void);
   RSSFeeder(const std::string &name);
   ~RSSFeeder();
 };
