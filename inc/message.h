@@ -15,7 +15,7 @@
  * @class Message
  */
 class Message {
- public:
+public:
   /**
    * @brief friend function used to print Message instance
    * @param [out] os - output stream instance
@@ -28,6 +28,12 @@ class Message {
    * @brief default constructor
    */
   Message(void);
+  
+  /**
+   * @brief constructor
+   * @param [in] payload - payload of message
+   */
+  Message(const std::string &payload);
 
   /**
    * @brief copy constructor
@@ -99,7 +105,7 @@ class Message {
    */
   bool operator!=(const Message &message);
   
- private:
+private:
   //! time label
   struct timeval m_tv;
   

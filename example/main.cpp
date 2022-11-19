@@ -3,64 +3,41 @@
 #include "rssReader.h"
 #include <thread>
 
-#define FEEDER_COUNT       (10)
+#define READER_COUNT  (4)
+#define FEEDER_COUNT  (4)
 
-Topic topic = TopicFactory::getInstance()->create();
-
-void feed(RSSFeeder feeder, Message message) {
-  for (int i = 0; i < 10; ++i) {
-    feeder.notify(message);
-  }
-}
+void feed(RSSFeeder feeder, Message message);
 
 int main(int argc, char **argv) {
-  RSSReader reader {"rss-reader"};
-  Message messages[FEEDER_COUNT];
-  // feeder list
-  RSSFeeder feeders[FEEDER_COUNT] = {
-    RSSFeeder("message-feeder-1"),
-    RSSFeeder("message-feeder-2"),
-    RSSFeeder("message-feeder-3"),
-    RSSFeeder("message-feeder-4"),
-    RSSFeeder("message-feeder-5"),
-    RSSFeeder("message-feeder-6"),
-    RSSFeeder("message-feeder-7"),
-    RSSFeeder("message-feeder-8"),
-    RSSFeeder("message-feeder-9"),
-    RSSFeeder("message-feeder-10")
-  };
-  //! messages payloads
-  std::string payloads[FEEDER_COUNT] = {
-    "message-1",
-    "message-2",
-    "message-3",
-    "message-4",
-    "message-5",
-    "message-6",
-    "message-7",
-    "message-8",
-    "message-9",
-    "message-10"
+  Topic topic = TopicFactory::getInstance()->create();
+  
+  RSSReader readers[READER_COUNT] = {
+    RSSReader("Reader-1"),
+    RSSReader("Reader-2"),
+    RSSReader("Reader-3"),
+    RSSReader("Reader-4")
   };
   
-  topic.subscribe(&reader);
+  RSSFeeder feeders[FEEDER_COUNT] = {
+    RSSFeeder("Feeder-1"),
+    RSSFeeder("Feeder-2"),
+    RSSFeeder("Feeder-3"),
+    RSSFeeder("Feeder-4")
+  };
+
+  for (int i = 0; i < READER_COUNT; ++i) {
+    topic.subscribe(&readers[i]);
+  }
 
   for (int i = 0; i < FEEDER_COUNT; ++i) {
-    messages[i].setPayload(payloads[i]);
     feeders[i].setTopic(&topic);
   }
 
   std::thread threads[FEEDER_COUNT] = {
-    std::thread(feed, feeders[0], messages[0]),
-    std::thread(feed, feeders[1], messages[1]),
-    std::thread(feed, feeders[2], messages[2]),
-    std::thread(feed, feeders[3], messages[3]),
-    std::thread(feed, feeders[4], messages[4]),
-    std::thread(feed, feeders[5], messages[5]),
-    std::thread(feed, feeders[6], messages[6]),
-    std::thread(feed, feeders[7], messages[7]),
-    std::thread(feed, feeders[8], messages[8]),
-    std::thread(feed, feeders[9], messages[9])
+    std::thread(feed, feeders[0], Message("Message from Feeder-1")),
+    std::thread(feed, feeders[1], Message("Message from Feeder-2")),
+    std::thread(feed, feeders[2], Message("Message from Feeder-3")),
+    std::thread(feed, feeders[3], Message("Message from Feeder-4"))
   };
 
   for (int i = 0; i < FEEDER_COUNT; ++i) {
@@ -68,4 +45,12 @@ int main(int argc, char **argv) {
   }
   
   return 0;
+}
+		
+void feed(RSSFeeder feeder, Message message) {
+  for (int i = 0; i < 3; ++i) {
+    feeder.notify(message);
+  }
+  
+  return;
 }

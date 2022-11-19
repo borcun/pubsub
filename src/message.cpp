@@ -8,10 +8,14 @@ std::ostream& operator<<(std::ostream &os, const Message &message) {
   return os;
 }
 
-Message::Message(void) {
+Message::Message(void) : m_payload("") {
   m_tv.tv_sec = 0;
   m_tv.tv_usec = 0;
-  m_payload.clear();
+}
+
+Message::Message(const std::string &payload) : m_payload(payload) {
+  m_tv.tv_sec = 0;
+  m_tv.tv_usec = 0;
 }
 
 Message::Message(const Message &message) {

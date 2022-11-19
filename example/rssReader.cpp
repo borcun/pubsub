@@ -9,6 +9,6 @@ RSSReader::~RSSReader() {
 }
 
 void RSSReader::onReceived(const Message &message) {
-  //std::cout << "Received message by " << getName() << std::endl;
+  std::cout << "Received message by " << getName() << std::endl;
   std::cout << message << std::endl;
 }
