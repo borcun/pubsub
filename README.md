@@ -1,35 +1,33 @@
 ### About Library
 
-It is a small publisher-subscriber library, which is developed on Fedora OS for Intel x64 architecture.
-The library includes four important concepts:
+It is a small publisher-subscriber library, which is developed on Fedora OS for AMD x64 architecture.
+The library includes four important components:
 
  1. Message
- 2. MessageFactory
- 3. Publisher & Subscriber
- 4. Message Service
+ 2. Topic
+ 3. TopicFactory
+ 4. Publisher & Subscriber
 
-Message is the basic data model, which exists from topic, time label and payload fields. The topic is
-a string and must be unique within your projects. It is used to make Message instance as unique either.
-The time label is struct timeval instance of the any UNIX system. It is used to reveal the time when
-the payload of Message instance is set. Therefore, it is set once the payload is set. The last field,
-the payload is data part of Message instance. It's designed as a string like topic.
+Message is the basic data model, which exists time label and payload fields. The time label is struct 
+timeval instance of the any UNIX system. It is used to reveal the time when the payload of Message 
+instance is set. Therefore, it should be set once the payload is set. The payload is data part of 
+Message instance.
 
-MessageFactory is a class that is designed as both factory and singleton design patterns. It generates
-custom messages according to topic given by developer and stores the messages into a message list.
-Storing the messages into a message list, it can check any willness of regeneration of any message.
-Therefore, it can provides uniqueness of each message.
+Topic is a context which includes subscribers and are connected to many publishers. Each topic
+instance has unique ID value that is used to store topics created by TopicFactory. Since publishers
+more than one may have merely one topic, topic functionality must be thread-safe. Its publishing
+function is protected by using locking mechanism.
+
+TopicFactory is a class that is designed as both factory and singleton design patterns. It generates
+topics, and stores them into a topic list to prevent regeneration. Therefore, it can provides 
+uniqueness of each message.
 
 Publisher and Subscriber classes are communication components of the library. Knowing from observer
 design pattern, these components provides event-based communication instead of polling mechanism.
-Sharing data between them is Message intances. Message instances created by MessageFactory are shared
-from one publisher to many subscribers, which are connected together within special context.
+Sharing data between them is Message intances.
 
 Publisher and Subscriber classes are interfaces for the communication. Although Subscriber is an
 abstract class in terms of C++ terminology, Publisher is concrete class. Developer can use Publisher
 class as it's present, but inheriting it as well like does for Subscriber classes is recommended.
 Subscriber class includes a pure virtual function called onReceived. Its aim is being used as a
 callback by developer.
-
-MessageService class exists from one Message instance, one Publisher instance and many Subscriber
-instances. After setting fields of a MessageService instance, you can execute it to perform message
-delivering according to publish-subscribe principle.
