@@ -1,6 +1,6 @@
 /**
  * @file message.h
- * @brief Message class
+ * @brief Message is a class that refers to data shared between publishers and subscribers
  * @author B. Orcun Ozkablan
  */
 
@@ -18,8 +18,8 @@ class Message {
 public:
   /**
    * @brief friend function used to print Message instance
-   * @param [out] os - output stream instance
-   * @param [in] message - Message instance
+   * @param [in|out] os - output stream instance
+   * @param [in] message - Message reference
    * @return output stream filled
    */
   friend std::ostream& operator<<(std::ostream &os, const Message &message);
@@ -55,6 +55,7 @@ public:
   /**
    * @brief function that sets time label of the message
    * @param [in] tv - message time label
+   * @return -
    */
   void setTime(const struct timeval &tv);
 

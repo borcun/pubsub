@@ -33,6 +33,8 @@ int main(int argc, char **argv) {
     feeders[i].setTopic(&topic);
   }
 
+  std::cout << topic << std::endl;
+
   std::thread threads[FEEDER_COUNT] = {
     std::thread(feed, feeders[0], Message("Message from Feeder-1")),
     std::thread(feed, feeders[1], Message("Message from Feeder-2")),

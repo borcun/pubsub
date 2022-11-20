@@ -12,11 +12,13 @@ all:
 	$(CXX) $(CFLAGS) -fPIC $(SRC) $(IFLAGS)
 	$(CXX) $(SHARED) $(LFLAGS) $(LIB) $(OBJ)
 	cd $(EXAMPLE_DIR) && make
+	cd $(TEST_DIR) && make
 
 .PHONY: clean
 clean:
 	rm -rf $(OBJ) $(LIB) *~
 	cd $(EXAMPLE_DIR) && make clean
+	cd $(TEST_DIR) && make clean
 
 .PHONY: install
 install:

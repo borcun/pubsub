@@ -1,6 +1,6 @@
 /**
  * @file subscriber.h
- * @brief base subscriber class, also an abstract class
+ * @brief Subscriber is a class that registers a topic to listen any message from publishers
  * @author B. Orcun Ozkablan
  */
 

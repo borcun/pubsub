@@ -4,6 +4,11 @@ Publisher::Publisher(const std::string &name) : m_name(name) {
   m_topic = nullptr;
 }
 
+Publisher::Publisher(const Publisher &publisher) {
+  m_name = publisher.m_name;
+  m_topic = publisher.m_topic;
+}
+
 Publisher::~Publisher() {
   m_topic = nullptr;
 }
@@ -18,11 +23,11 @@ void Publisher::setTopic(Topic *topic) {
 }
 
 bool Publisher::operator==(const Publisher &publisher) {
-  return publisher.m_name == m_name;
+  return publisher.m_name == m_name && m_topic == publisher.m_topic;
 }
 
 bool Publisher::operator!=(const Publisher &publisher) {
-  return publisher.m_name != m_name;
+  return !(*this == publisher);
 }
 
 void Publisher::notify(Message message) {

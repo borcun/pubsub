@@ -1,21 +1,21 @@
 #include "topicFactory.h"
 
-TopicFactory *TopicFactory::m_instance = nullptr;
+TopicFactory *TopicFactory::instance = nullptr;
 
 TopicFactory::~TopicFactory() {
-  if (nullptr != m_instance) {
-    delete m_instance;
+  if (nullptr != instance) {
+    delete instance;
   }
 
   m_topics.clear();
 }
 
 TopicFactory *TopicFactory::getInstance(void) {
-  if (nullptr == m_instance) {
-    m_instance = new TopicFactory();
+  if (nullptr == instance) {
+    instance = new TopicFactory();
   }
 
-  return m_instance;
+  return instance;
 }
 
 Topic TopicFactory::create(void) {

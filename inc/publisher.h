@@ -1,6 +1,6 @@
 /**
  * @file publisher.h
- * @brief base publisher class, constructed by using observer design pattern
+ * @brief Publisher is a class that includes a topic to send message to subscribers registered
  * @author B. Orcun Ozkablan
  */
 
@@ -19,6 +19,12 @@ class Publisher {
    * @param [in] name - name of publisher
    */
   Publisher(const std::string &name);
+
+  /**
+   * @brief copy constructor
+   * @param [in] publisher - Publisher reference
+   */
+  Publisher(const Publisher &publisher);
 
   /**
    * @brief destructor

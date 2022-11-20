@@ -35,21 +35,23 @@ class TopicFactory {
   /**
    * @brief function that checks whether Topic instance is into topic list
    * @param [in] topic - Topic reference
-   * @return true if the Topic instance is in topic list. Otherwise, return false.x
+   * @return true if the Topic instance is in topic list. Otherwise, return false.
    */
   bool contains(Topic &topic);
 
  private:
   //! class pointer
-  static TopicFactory *m_instance;
+  static TopicFactory *instance;
   
   //! topics
   std::map<unsigned int, Topic> m_topics;
 
   //! default constructor
   TopicFactory(void) = default;
+  
   //! copy constructor
   TopicFactory(const TopicFactory &topicFactory) = delete;
+
   //! copy assignment operator
   TopicFactory &operator=(const TopicFactory &topicFactory) = delete;
 };
