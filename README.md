@@ -33,5 +33,5 @@ Subscriber class includes a pure virtual function called onReceived. Its aim is 
 callback by developer.
 
 Example directory includes a simple example to demonstrate how library works. Test directory
-includes some test steps like unit test. Due to dependecy conflict or missing reference consideration,
+includes some test steps like unit test. Due to dependency conflict or missing reference consideration,
 any 3rd party test framework is not used.
